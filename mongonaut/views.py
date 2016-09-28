@@ -153,19 +153,19 @@ class DocumentListView(MongonautViewMixin, FormView):
         context['total_pages'] = self.total_pages
 
         # Part of upcoming list view form functionality
-        if self.queryset.count():
-            context['keys'] = ['id', ]
-
-            # Show those items for which we've got list_fields on the mongoadmin
-            for key in [x for x in self.mongoadmin.list_fields if x != 'id' and x in self.document._fields.keys()]:
-
-                # TODO - Figure out why this EmbeddedDocumentField and ListField breaks this view
-                # Note - This is the challenge part, right? :)
-                if isinstance(self.document._fields[key], EmbeddedDocumentField):
-                    continue
-                if isinstance(self.document._fields[key], ListField):
-                    continue
-                context['keys'].append(key)
+        # if self.queryset.count():
+        #     context['keys'] = ['id', ]
+        #
+        #     # Show those items for which we've got list_fields on the mongoadmin
+        #     for key in [x for x in self.mongoadmin.list_fields if x != 'id' and x in self.document._fields.keys()]:
+        #
+        #         # TODO - Figure out why this EmbeddedDocumentField and ListField breaks this view
+        #         # Note - This is the challenge part, right? :)
+        #         if isinstance(self.document._fields[key], EmbeddedDocumentField):
+        #             continue
+        #         if isinstance(self.document._fields[key], ListField):
+        #             continue
+        #         context['keys'].append(key)
 
         if self.mongoadmin.search_fields:
             context['search_field'] = True
